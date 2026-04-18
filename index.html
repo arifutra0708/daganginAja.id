@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>daganginAja.id — Bertemu Penjual dan Pembeli Cepat dan Aman</title>
+<meta name="description" content="daganginAja.id — Marketplace lokal. Bertemu penjual dan pembeli cepat dan aman. Beli langsung via WhatsApp." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Work+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --blue-50: #EAF3FF;
+    --blue-100: #D6E7FF;
+    --blue-200: #A8CCFF;
+    --blue-300: #6FA8FF;
+    --blue-500: #1E6FEB;
+    --blue-600: #0F5BD4;
+    --blue-700: #0B47A8;
+    --blue-900: #07275C;
+    --ink: #0B1A33;
+    --muted: #5B6B86;
+    --line: #E4ECF7;
+    --bg: #F6F9FE;
+    --white: #ffffff;
+    --warning: #FFB800;
+    --success: #10B981;
+    --danger: #EF4444;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(11,26,51,.06);
+    --shadow-md: 0 8px 24px rgba(11,71,168,.08);
+    --shadow-lg: 0 20px 40px rgba(11,71,168,.14);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4 { font-family: 'Work Sans', 'Manrope', sans-serif; letter-spacing: -0.01em; margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    background: var(--blue-900);
+    color: #C8D7F2;
+    font-size: 13px;
+  }
+  .topbar-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 36px;
+  }
+  .topbar a { color: #C8D7F2; margin-left: 16px; }
+  .topbar a:hover { color: #fff; }
+
+  /* ---------- HEADER ---------- */
+  header.site-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 50;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-inner {
+    display: flex; align-items: center; gap: 20px;
+    height: 72px;
+  }
+  .logo {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 800; font-size: 22px;
+    color: var(--blue-700);
+    display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .logo .dot { color: var(--warning); }
+  .logo-badge {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    display: grid; place-items: center;
+    color: white; font-weight: 800; font-size: 16px;
+  }
+  .search {
+    flex: 1; max-width: 680px;
+    position: relative;
+  }
+  .search input {
+    width: 100%; height: 44px;
+    padding: 0 18px 0 44px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-size: 14px; font-family: inherit;
+    background: var(--bg);
+    transition: border-color .2s, background .2s;
+  }
+  .search input:focus {
+    outline: none; border-color: var(--blue-500); background: white;
+  }
+  .search i {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--muted);
+  }
+  nav.primary {
+    display: flex; gap: 6px; align-items: center;
+  }
+  nav.primary a {
+    padding: 10px 14px; border-radius: 8px;
+    font-weight: 600; font-size: 14px; color: var(--ink);
+    transition: background .15s;
+  }
+  nav.primary a:hover { background: var(--blue-50); color: var(--blue-700); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 10px;
+    font-weight: 700; font-size: 14px; font-family: inherit;
+    border: none; cursor: pointer;
+    transition: transform .15s ease, box-shadow .2s, background .2s;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--blue-600); color: white;
+  }
+  .btn-primary:hover { background: var(--blue-700); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--blue-700); border: 1.5px solid var(--blue-200);
+  }
+  .btn-ghost:hover { background: var(--blue-50); }
+  .btn-wa {
+    background: #25D366; color: white;
+  }
+  .btn-wa:hover { background: #1EB257; box-shadow: 0 8px 20px rgba(37,211,102,.35); transform: translateY(-1px); }
+
+  .mobile-toggle { display: none; background: none; border: none; font-size: 22px; color: var(--ink); cursor: pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background:
+      radial-gradient(ellipse at 85% 20%, rgba(255,255,255,.16), transparent 50%),
+      radial-gradient(ellipse at 10% 90%, rgba(255,184,0,.18), transparent 40%),
+      linear-gradient(135deg, var(--blue-700) 0%, var(--blue-500) 100%);
+    color: white;
+    padding: 72px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><circle cx='2' cy='2' r='1' fill='%23ffffff' opacity='0.12'/></svg>");
+    pointer-events: none;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px;
+    align-items: center; position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 4.4vw, 54px); line-height: 1.08; font-weight: 800;
+    letter-spacing: -0.02em; margin-bottom: 18px;
+  }
+  .hero h1 .accent { color: var(--warning); }
+  .hero p.lead {
+    font-size: 17px; color: #D7E5FB; margin: 0 0 28px; max-width: 520px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-ctas .btn-primary { background: white; color: var(--blue-700); }
+  .hero-ctas .btn-primary:hover { background: var(--blue-50); }
+  .trust {
+    display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap;
+  }
+  .trust div { display: flex; flex-direction: column; }
+  .trust .num { font-family: 'Work Sans', sans-serif; font-weight: 800; font-size: 26px; color: white; }
+  .trust .lbl { font-size: 13px; color: #A8C2F0; }
+
+  .hero-card {
+    background: white; color: var(--ink);
+    border-radius: 20px; padding: 24px;
+    box-shadow: var(--shadow-lg);
+    transform: rotate(1.5deg);
+    position: relative;
+  }
+  .hero-card::after {
+    content: ""; position: absolute; inset: -14px; border-radius: 24px;
+    background: rgba(255,255,255,.08); z-index: -1;
+  }
+  .hero-card h4 { font-size: 14px; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
+  .hero-card .price { font-size: 22px; font-weight: 800; color: var(--blue-700); }
+  .hero-card .name { font-weight: 700; margin: 4px 0 10px; }
+  .hero-card .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-50); color: var(--blue-700);
+    padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
+  }
+  .hero-card .mini-img {
+    width: 100%; height: 160px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--blue-100), var(--blue-50));
+    display: grid; place-items: center; font-size: 48px; color: var(--blue-600);
+    margin-bottom: 14px;
+  }
+
+  /* ---------- CATEGORY STRIP ---------- */
+  .cats {
+    background: white; border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  .cats-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+  }
+  .cat {
+    text-align: center; padding: 14px 8px; border-radius: 12px;
+    transition: background .2s, transform .15s;
+    cursor: pointer;
+  }
+  .cat:hover { background: var(--blue-50); transform: translateY(-2px); }
+  .cat-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--blue-50); color: var(--blue-600);
+    display: grid; place-items: center; margin: 0 auto 8px;
+    font-size: 22px;
+  }
+  .cat span { font-size: 13px; font-weight: 600; color: var(--ink); }
+
+  /* ---------- SECTION ---------- */
+  section { padding: 72px 0; }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: 32px; gap: 20px;
+  }
+  .section-head h2 {
+    font-size: clamp(26px, 3vw, 34px); font-weight: 800; color: var(--ink);
+  }
+  .section-head .subtitle { color: var(--muted); font-size: 15px; margin-top: 6px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--blue-600); font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px;
+  }
+  .eyebrow::before {
+    content: ""; width: 24px; height: 2px; background: var(--blue-600); border-radius: 2px;
+  }
+
+  /* ---------- PRODUCTS ---------- */
+  .products-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
+  }
+  .card {
+    background: white; border-radius: var(--radius);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .25s ease, border-color .2s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--blue-200);
+  }
+  .card-img {
+    aspect-ratio: 1/1;
+    background: var(--blue-50);
+    display: grid; place-items: center; color: var(--blue-600);
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .badge {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--warning); color: var(--blue-900);
+    font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .badge.new { background: var(--blue-600); color: white; }
+  .card-body { padding: 14px 14px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card h3 {
+    font-size: 15px; font-weight: 700; color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; min-height: 42px;
+  }
+  .card .cat-tag { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .card .price-row { display: flex; align-items: baseline; gap: 8px; margin-top: 4px; }
+  .card .price {
+    font-family: 'Work Sans'; font-size: 18px; font-weight: 800; color: var(--blue-700);
+  }
+  .card .price-old { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+  .card .rating { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .card .rating i { color: var(--warning); }
+  .card .buy {
+    margin-top: 12px; width: 100%;
+    background: var(--blue-600); color: white;
+    border: none; border-radius: 10px;
+    padding: 10px; font-weight: 700; font-size: 13px; font-family: inherit;
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background .2s;
+  }
+  .card .buy:hover { background: var(--blue-700); }
+  .card .buy i { font-size: 14px; }
+
+  /* ---------- CONTACT / ORDER FORM ---------- */
+  .contact-section {
+    background: linear-gradient(180deg, var(--white), var(--blue-50));
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: start;
+  }
+  .contact-card {
+    background: white; padding: 32px; border-radius: 20px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block; font-size: 13px; font-weight: 700;
+    color: var(--ink); margin-bottom: 6px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid var(--line); border-radius: 10px;
+    font-size: 14px; font-family: inherit; color: var(--ink);
+    background: var(--bg);
+    transition: border-color .15s, background .15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--blue-500); background: white;
+  }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .addr-row { display: flex; gap: 10px; }
+  .addr-row textarea { flex: 1; }
+  .maps-btn {
+    background: var(--blue-50); color: var(--blue-700);
+    border: 1.5px solid var(--blue-200);
+    padding: 0 16px; border-radius: 10px;
+    font-weight: 700; font-size: 13px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+    transition: background .2s;
+  }
+  .maps-btn:hover { background: var(--blue-100); }
+
+  .admin-info h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .admin-info p.muted { color: var(--muted); margin: 0 0 24px; }
+  .info-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .info-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px; border-radius: 14px; background: white; border: 1px solid var(--line);
+  }
+  .info-list .icon-wrap {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--blue-50); color: var(--blue-600);
+    display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
+  }
+  .info-list .lbl { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+  .info-list .val { font-weight: 700; color: var(--ink); font-size: 15px; margin-top: 2px; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .step {
+    background: white; padding: 28px; border-radius: 16px;
+    border: 1px solid var(--line);
+    position: relative; transition: transform .2s, box-shadow .2s;
+  }
+  .step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .step .num {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--blue-600); color: white;
+    display: grid; place-items: center;
+    font-family: 'Work Sans'; font-weight: 800; font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .step h3 { font-size: 18px; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--blue-900); color: #B9CCEB; padding: 56px 0 24px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px;
+    padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  footer h4 { color: white; font-size: 15px; margin-bottom: 14px; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer a { color: #B9CCEB; font-size: 14px; }
+  footer a:hover { color: white; }
+  .footer-about p { font-size: 14px; line-height: 1.6; color: #9FB4D6; margin: 12px 0 18px; }
+  .social { display: flex; gap: 10px; }
+  .social a {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,.06);
+    display: grid; place-items: center;
+    transition: background .2s;
+  }
+  .social a:hover { background: var(--blue-600); color: white; }
+  .copy {
+    text-align: center; padding-top: 24px; font-size: 13px; color: #8AA3CC;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+    .cats-grid { grid-template-columns: repeat(6, 1fr); }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { max-width: 340px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav.primary, .search { display: none; }
+    .mobile-toggle { display: block; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .cats-grid { grid-template-columns: repeat(3, 1fr); }
+    .steps { grid-template-columns: 1fr; }
+    .hero { padding: 48px 0 64px; }
+    .topbar-inner .tb-left { display: none; }
+    section { padding: 48px 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .addr-row { flex-direction: column; }
+    .maps-btn { justify-content: center; padding: 12px; }
+  }
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card h3 { font-size: 14px; min-height: 40px; }
+    .card .price { font-size: 16px; }
+  }
+
+  /* Floating WA button */
+  .fab-wa {
+    position: fixed; right: 20px; bottom: 20px;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366; color: white;
+    display: grid; place-items: center;
+    font-size: 26px;
+    box-shadow: 0 12px 28px rgba(37,211,102,.45);
+    z-index: 100;
+    transition: transform .2s;
+  }
+  .fab-wa:hover { transform: scale(1.08); }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(120%);
+    background: var(--ink); color: white;
+    padding: 12px 20px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    z-index: 200; opacity: 0;
+    transition: transform .3s, opacity .3s;
+    box-shadow: var(--shadow-lg);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast i { color: var(--success); }
+</style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar" data-testid="topbar">
+    <div class="container topbar-inner">
+      <div class="tb-left"><i class="fa-solid fa-shield-halved"></i>&nbsp; Transaksi aman, langsung ke penjual</div>
+      <div>
+        <a href="#kontak" data-testid="topbar-help"><i class="fa-solid fa-headset"></i> Bantuan</a>
+        <a href="#kontak" data-testid="topbar-seller"><i class="fa-solid fa-store"></i> Jadi Penjual</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="logo" data-testid="site-logo">
+        <span class="logo-badge">d</span>
+        dagangin<span style="color:var(--blue-500)">Aja</span><span class="dot">.id</span>
+      </a>
+      <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Cari produk, kategori, atau merek..." data-testid="search-input" />
+      </div>
+      <nav class="primary">
+        <a href="#home" data-testid="nav-home"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#produk" data-testid="nav-products">Produk</a>
+        <a href="#kontak" data-testid="nav-contact">Kontak Admin</a>
+      </nav>
+      <a href="https://wa.me/6282376647842?text=Halo%20admin%20daganginAja.id%2C%20saya%20ingin%20bertanya." target="_blank" rel="noopener" class="btn btn-wa" data-testid="header-wa-btn">
+        <i class="fa-brands fa-whatsapp"></i> Chat Admin
+      </a>
+      <button class="mobile-toggle" aria-label="Menu" data-testid="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow" style="color:var(--warning)"><span style="background:var(--warning);width:24px;height:2px;border-radius:2px;display:inline-block;"></span>&nbsp; Marketplace lokal terpercaya</span>
+        <h1>Bertemu <span class="accent">penjual</span> dan <span class="accent">pembeli</span><br/>cepat dan aman.</h1>
+        <p class="lead">daganginAja.id mempertemukanmu langsung dengan penjual terpercaya. Pilih barang, isi alamat dari Google Maps, lalu beli langsung via WhatsApp — tanpa ribet.</p>
+        <div class="hero-ctas">
+          <a href="#produk" class="btn btn-primary" data-testid="hero-shop-btn"><i class="fa-solid fa-bag-shopping"></i> Belanja Sekarang</a>
+          <a href="#kontak" class="btn btn-ghost" style="color:white;border-color:rgba(255,255,255,.4)" data-testid="hero-contact-btn"><i class="fa-solid fa-message"></i> Hubungi Admin</a>
+        </div>
+        <div class="trust">
+          <div><span class="num">5K+</span><span class="lbl">Pembeli puas</span></div>
+          <div><span class="num">500+</span><span class="lbl">Penjual aktif</span></div>
+          <div><span class="num">4.9<i class="fa-solid fa-star" style="color:var(--warning);font-size:16px;margin-left:4px"></i></span><span class="lbl">Rating pembeli</span></div>
+        </div>
+      </div>
+      <div class="hero-card" data-testid="hero-card">
+        <div class="mini-img"><i class="fa-solid fa-headphones"></i></div>
+        <span class="pill"><i class="fa-solid fa-fire" style="color:var(--warning)"></i> Terlaris minggu ini</span>
+        <div class="name" style="margin-top:8px">Wireless Earbuds Pro X</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <span class="price">Rp 189.000</span>
+          <span style="color:var(--muted);font-size:13px"><i class="fa-solid fa-star" style="color:var(--warning)"></i> 4.9 · 1.2k</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY STRIP -->
+  <div class="cats">
+    <div class="container">
+      <div class="cats-grid">
+        <div class="cat" data-testid="cat-fashion"><div class="cat-icon"><i class="fa-solid fa-shirt"></i></div><span>Fashion</span></div>
+        <div class="cat" data-testid="cat-elektronik"><div class="cat-icon"><i class="fa-solid fa-mobile-screen"></i></div><span>Elektronik</span></div>
+        <div class="cat" data-testid="cat-makanan"><div class="cat-icon"><i class="fa-solid fa-bowl-food"></i></div><span>Makanan</span></div>
+        <div class="cat" data-testid="cat-rumah"><div class="cat-icon"><i class="fa-solid fa-couch"></i></div><span>Rumah Tangga</span></div>
+        <div class="cat" data-testid="cat-aksesoris"><div class="cat-icon"><i class="fa-solid fa-bag-shopping"></i></div><span>Aksesoris</span></div>
+        <div class="cat" data-testid="cat-semua"><div class="cat-icon" style="background:var(--warning);color:var(--blue-900)"><i class="fa-solid fa-grip"></i></div><span>Semua</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="produk">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Pilihan Terbaik</span>
+          <h2>5 Produk Unggulan Hari Ini</h2>
+          <div class="subtitle">Dipilih dari penjual terpercaya. Beli langsung via WhatsApp, cepat & aman.</div>
+        </div>
+        <a href="#kontak" class="btn btn-ghost" data-testid="see-all-btn">Lihat Semua <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="products-grid" data-testid="products-grid">
+        <!-- Product 1 -->
+        <article class="card" data-testid="product-1">
+          <div class="card-img">
+            <span class="badge">-25%</span>
+            <i class="fa-solid fa-shirt"></i>
+          </div>
+          <div class="card-body">
+            <span class="cat-tag">Fashion</span>
+            <h3>Kaos Polos Premium Cotton Combed 30s</h3>
+            <div class="rating"><i class="fa-solid fa-star"></i> 4.8 <span>· 832 terjual</span></div>
+            <div class="price-row">
+              <span class="price">Rp 75.000</span>
+              <span class="price-old">Rp 99.000</span>
+            </div>
+            <button class="buy" onclick="orderProduct('Kaos Polos Premium Cotton Combed 30s','Rp 75.000')" data-testid="buy-product-1">
+              <i class="fa-brands fa-whatsapp"></i> Beli via WhatsApp
+            </button>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="card" data-testid="product-2">
+          <div class="card-img">
+            <span class="badge new">BARU</span>
+            <i class="fa-solid fa-headphones"></i>
+          </div>
+          <div class="card-body">
+            <span class="cat-tag">Elektronik</span>
+            <h3>Wireless Earbuds Pro X Bluetooth 5.3</h3>
+            <div class="rating"><i class="fa-solid fa-star"></i> 4.9 <span>· 1.204 terjual</span></div>
+            <div class="price-row">
+              <span class="price">Rp 189.000</span>
+              <span class="price-old">Rp 249.000</span>
+            </div>
+            <button class="buy" onclick="orderProduct('Wireless Earbuds Pro X Bluetooth 5.3','Rp 189.000')" data-testid="buy-product-2">
+              <i class="fa-brands fa-whatsapp"></i> Beli via WhatsApp
+            </button>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="card" data-testid="product-3">
+          <div class="card-img" style="background:linear-gradient(135deg,#FFE8B3,#FFD27A)">
+            <span class="badge">HOT</span>
+            <i class="fa-solid fa-bowl-food" style="color:#B45309"></i>
+          </div>
+          <div class="card-body">
+            <span class="cat-tag">Makanan</span>
+            <h3>Keripik Singkong Pedas Manis 250gr</h3>
+            <div class="rating"><i class="fa-solid fa-star"></i> 4.7 <span>· 456 terjual</span></div>
+            <div class="price-row">
+              <span class="price">Rp 25.000</span>
+              <span class="price-old">Rp 35.000</span>
+            </div>
+            <button class="buy" onclick="orderProduct('Keripik Singkong Pedas Manis 250gr','Rp 25.000')" data-testid="buy-product-3">
+              <i class="fa-brands fa-whatsapp"></i> Beli via WhatsApp
+            </button>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="card" data-testid="product-4">
+          <div class="card-img">
+            <span class="badge">-30%</span>
+            <i class="fa-solid fa-mug-saucer"></i>
+          </div>
+          <div class="card-body">
+            <span class="cat-tag">Rumah Tangga</span>
+            <h3>Set Panci Anti Lengket 5 Pcs Ceramic</h3>
+            <div class="rating"><i class="fa-solid fa-star"></i> 4.8 <span>· 672 terjual</span></div>
+            <div class="price-row">
+              <span class="price">Rp 349.000</span>
+              <span class="price-old">Rp 499.000</span>
+            </div>
+            <button class="buy" onclick="orderProduct('Set Panci Anti Lengket 5 Pcs Ceramic','Rp 349.000')" data-testid="buy-product-4">
+              <i class="fa-brands fa-whatsapp"></i> Beli via WhatsApp
+            </button>
+          </div>
+        </article>
+
+        <!-- Product 5 -->
+        <article class="card" data-testid="product-5">
+          <div class="card-img" style="background:linear-gradient(135deg,#D6E7FF,#A8CCFF)">
+            <span class="badge new">BARU</span>
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <div class="card-body">
+            <span class="cat-tag">Aksesoris</span>
+            <h3>Tas Ransel Waterproof USB Port 25L</h3>
+            <div class="rating"><i class="fa-solid fa-star"></i> 4.9 <span>· 985 terjual</span></div>
+            <div class="price-row">
+              <span class="price">Rp 159.000</span>
+              <span class="price-old">Rp 219.000</span>
+            </div>
+            <button class="buy" onclick="orderProduct('Tas Ransel Waterproof USB Port 25L','Rp 159.000')" data-testid="buy-product-5">
+              <i class="fa-brands fa-whatsapp"></i> Beli via WhatsApp
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="background:white" id="cara">
+    <div class="container">
+      <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center">
+        <div>
+          <span class="eyebrow" style="justify-content:center">Cara Kerja</span>
+          <h2>3 Langkah Mudah Belanja</h2>
+          <div class="subtitle">Transaksi langsung antara penjual & pembeli — tanpa rekening bersama rumit.</div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step" data-testid="step-1">
+          <div class="num">1</div>
+          <h3>Pilih Produk</h3>
+          <p>Jelajahi 5 produk unggulan kami dan pilih sesuai kebutuhanmu.</p>
+        </div>
+        <div class="step" data-testid="step-2">
+          <div class="num">2</div>
+          <h3>Isi Alamat via Google Maps</h3>
+          <p>Klik tombol Pilih Lokasi, salin alamat dari Google Maps, lalu tempel di form.</p>
+        </div>
+        <div class="step" data-testid="step-3">
+          <div class="num">3</div>
+          <h3>Beli via WhatsApp</h3>
+          <p>Pesanan otomatis terkirim ke admin via WhatsApp. Cepat & aman.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / ORDER -->
+  <section class="contact-section" id="kontak">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Kontak Admin</span>
+          <h2>Pesan atau Tanya Admin</h2>
+          <div class="subtitle">Isi form di bawah — admin akan balas via WhatsApp dalam hitungan menit.</div>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Form -->
+        <div class="contact-card" data-testid="order-form">
+          <div class="field">
+            <label for="name">Nama Lengkap</label>
+            <input type="text" id="name" placeholder="Nama kamu" data-testid="input-name" />
+          </div>
+          <div class="field">
+            <label for="phone">No. WhatsApp</label>
+            <input type="tel" id="phone" placeholder="08xxxxxxxxxx" data-testid="input-phone" />
+          </div>
+          <div class="field">
+            <label for="product">Produk yang Dipesan</label>
+            <select id="product" data-testid="input-product">
+              <option value="">— Pilih produk —</option>
+              <option>Kaos Polos Premium Cotton Combed 30s — Rp 75.000</option>
+              <option>Wireless Earbuds Pro X Bluetooth 5.3 — Rp 189.000</option>
+              <option>Keripik Singkong Pedas Manis 250gr — Rp 25.000</option>
+              <option>Set Panci Anti Lengket 5 Pcs Ceramic — Rp 349.000</option>
+              <option>Tas Ransel Waterproof USB Port 25L — Rp 159.000</option>
+              <option>Pertanyaan lain (tanya admin)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="address">Alamat Pengiriman</label>
+            <div class="addr-row">
+              <textarea id="address" placeholder="Tempel alamat dari Google Maps di sini..." data-testid="input-address"></textarea>
+              <button class="maps-btn" type="button" onclick="openMaps()" data-testid="maps-btn">
+                <i class="fa-solid fa-location-dot"></i> Pilih Lokasi
+              </button>
+            </div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px"><i class="fa-solid fa-circle-info"></i> Klik "Pilih Lokasi" → salin alamat lengkap → tempel ke kolom di atas.</div>
+          </div>
+          <div class="field">
+            <label for="note">Catatan (opsional)</label>
+            <textarea id="note" placeholder="Ukuran, warna, jumlah, dll." data-testid="input-note"></textarea>
+          </div>
+          <button class="btn btn-wa" style="width:100%;justify-content:center;padding:14px;font-size:15px" onclick="submitOrder()" data-testid="submit-order-btn">
+            <i class="fa-brands fa-whatsapp"></i> Kirim Pesanan via WhatsApp
+          </button>
+        </div>
+
+        <!-- Admin info -->
+        <div class="admin-info">
+          <h3>Hubungi Kami</h3>
+          <p class="muted">Admin daganginAja.id siap membantu transaksi kamu 24/7.</p>
+          <ul class="info-list">
+            <li data-testid="info-wa">
+              <div class="icon-wrap" style="background:#E7FAEE;color:#25D366"><i class="fa-brands fa-whatsapp"></i></div>
+              <div>
+                <div class="lbl">WhatsApp Admin</div>
+                <div class="val">+62 823-7664-7842</div>
+                <a href="https://wa.me/6282376647842" target="_blank" rel="noopener" style="color:var(--blue-600);font-size:13px;font-weight:700">Chat sekarang →</a>
+              </div>
+            </li>
+            <li data-testid="info-email">
+              <div class="icon-wrap"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <div class="lbl">Email</div>
+                <div class="val">admin@daganginaja.id</div>
+              </div>
+            </li>
+            <li data-testid="info-hours">
+              <div class="icon-wrap"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <div class="lbl">Jam Operasional</div>
+                <div class="val">Senin – Minggu · 08.00 – 21.00 WIB</div>
+              </div>
+            </li>
+            <li data-testid="info-location">
+              <div class="icon-wrap"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <div class="lbl">Lokasi</div>
+                <div class="val">Indonesia</div>
+                <a href="https://maps.app.goo.gl/tScfzXJMDVRsDuFVA" target="_blank" rel="noopener" style="color:var(--blue-600);font-size:13px;font-weight:700">Lihat di Google Maps →</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="logo" style="color:white">
+            <span class="logo-badge">d</span>
+            dagangin<span style="color:var(--blue-300)">Aja</span><span style="color:var(--warning)">.id</span>
+          </div>
+          <p>Marketplace lokal Indonesia yang mempertemukan penjual dan pembeli secara cepat dan aman. Belanja langsung via WhatsApp, tanpa ribet.</p>
+          <div class="social">
+            <a href="#" aria-label="Instagram" data-testid="social-ig"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook" data-testid="social-fb"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="TikTok" data-testid="social-tt"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/6282376647842" target="_blank" aria-label="WhatsApp" data-testid="social-wa"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#cara">Cara Kerja</a></li>
+            <li><a href="#kontak">Kontak Admin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kategori</h4>
+          <ul>
+            <li><a href="#produk">Fashion</a></li>
+            <li><a href="#produk">Elektronik</a></li>
+            <li><a href="#produk">Makanan</a></li>
+            <li><a href="#produk">Rumah Tangga</a></li>
+            <li><a href="#produk">Aksesoris</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Bantuan</h4>
+          <ul>
+            <li><a href="#kontak">FAQ</a></li>
+            <li><a href="#kontak">Cara Pesan</a></li>
+            <li><a href="#kontak">Cara Bayar</a></li>
+            <li><a href="#kontak">Kebijakan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">© 2025 daganginAja.id — Bertemu penjual dan pembeli cepat dan aman.</div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/6282376647842?text=Halo%20admin%20daganginAja.id" target="_blank" rel="noopener" class="fab-wa" aria-label="Chat WhatsApp" data-testid="fab-wa">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" data-testid="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-msg">Google Maps dibuka di tab baru.</span>
+  </div>
+
+<script>
+  const ADMIN_WA = "6282376647842";
+  const MAPS_URL = "https://maps.app.goo.gl/tScfzXJMDVRsDuFVA";
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function openMaps() {
+    window.open(MAPS_URL, '_blank', 'noopener');
+    showToast('Google Maps terbuka. Salin alamatmu lalu tempel di form.');
+  }
+
+  function orderProduct(name, price) {
+    document.getElementById('product').innerHTML =
+      `<option>${name} — ${price}</option>` + document.getElementById('product').innerHTML;
+    document.getElementById('product').value = `${name} — ${price}`;
+    document.getElementById('kontak').scrollIntoView({ behavior: 'smooth' });
+    showToast('Produk dipilih. Isi alamat & kirim ke WhatsApp.');
+  }
+
+  function submitOrder() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const product = document.getElementById('product').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const note = document.getElementById('note').value.trim();
+
+    if (!name || !product || !address) {
+      showToast('Isi nama, produk, & alamat dulu ya.');
+      return;
+    }
+
+    const msg =
+`*Pesanan Baru - daganginAja.id*
+-----------------------------
+Nama     : ${name}
+No. WA   : ${phone || '-'}
+Produk   : ${product}
+Alamat   : ${address}
+Catatan  : ${note || '-'}
+-----------------------------
+Mohon konfirmasinya, terima kasih!`;
+
+    const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank', 'noopener');
+  }
+
+  // Smooth scroll active link highlight
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1 && document.querySelector(id)) {
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
